@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from './components/app.vue'
+import TodoApp from './components/todoapp'
 
 const app = new Vue({
   el: '#app',
-  render: h => h(App),
+  render: h => h(TodoApp),
 });

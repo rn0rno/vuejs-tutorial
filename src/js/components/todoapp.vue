@@ -17,18 +17,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr v-for="item in computedTodos" v-bind:key="item.id">
-      <th v-text="item.id"></th>
-      <td>
-        <input type="text" v-model="item.comment" />
-      </td>
-      <td class="state">
-        <button @click="doChangeState(item)">{{ labels[item.state] }}</button>
-      </td>
-      <td class="button">
-        <button @click="doRemove(item)">削除</button>
-      </td>
-    </tr>
+    <TodoTr v-for="item in computedTodos" :key="item.id" :item="item" @doChangeState="doChangeState" @doRemove="doRemove"></TodoTr>
   </tbody>
 </table>
 
@@ -42,6 +31,8 @@
 </template>
 
 <script>
+import TodoTr from './todotr'
+
 var STORAGE_KEY = 'todos-vuejs-demo'
 var todoStorage = {
   fetch: function() {
@@ -88,11 +79,6 @@ export default {
         return this.current_option < 0 ? true : this.current_option === el.state
       }, this)
     },
-    labels() {
-      return this.options.reduce(function(a, b) {
-        return Object.assign(a, { [b.value]: b.label })
-      }, {})
-    }
   },
   methods: {
     doAdd(event, value) {
@@ -114,7 +100,10 @@ export default {
     doRemove(item) {
       var index = this.todos.indexOf(item);
       this.todos.splice(index, 1)
-    }
+    },
+  },
+  components: {
+    TodoTr,
   }
 }
 </script>
