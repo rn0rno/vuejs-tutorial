@@ -19,7 +19,9 @@
   <tbody>
     <tr v-for="item in computedTodos" v-bind:key="item.id">
       <th v-text="item.id"></th>
-      <td v-text="item.comment"></td>
+      <td>
+        <input type="text" v-model="item.comment" />
+      </td>
       <td class="state">
         <button @click="doChangeState(item)">{{ labels[item.state] }}</button>
       </td>
